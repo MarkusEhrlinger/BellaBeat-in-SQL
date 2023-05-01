@@ -40,7 +40,7 @@ I chose steps as an activity measurement.
 ```sql
 SELECT
    DISTINCT(Time),
-   SUM(StepTotal)
+   AVG(StepTotal)
 FROM
     capstone2-fitbit.FitBit_Data.hourlySteps
 GROUP BY
