@@ -12,6 +12,7 @@ executive team along with your high-level recommendations for Bellabeat’s mark
 Personal Note:
 I'm not coseplaying this, but rather try to show my approach how and why I did what I did. 
 ------------------------------------------------------------------------------------------
+I used mainly BigQuery, but did some cleaning and quick graphs in Google-Sheets/Libre Office Calc, the visualizations I did in Tableau on Tableau Public
 
 
 First I loaded the files to BigQuery as I wanted to do most of the work with SQL as some CSV-files are quite large.
@@ -178,4 +179,15 @@ GROUP BY
 
 ---------------------------------------------------------------------------------
 
+I then created a dashboard in Tableau to have these different graphs in one spot and to show some of my Tableau skills.
 
+![Dashboard 1](https://user-images.githubusercontent.com/132265260/235461715-d560cbeb-a8cc-4384-8dfd-72e8e7985629.png)
+
+https://public.tableau.com/app/profile/markus.ehrlinger/viz/Fitbit-4-sheets/Dashboard1#1
+
+--------------------------------------------------------------------------------------
+
+My conclusion is, that the most active days are Saturday and Tuesday. The lowest activity is on Sunday and Thursday. So maybe a motivational reminder on those days could be a thing.
+More active users work out after work, while medium users prefer the lunchbreak. Least active users prefer the morning. 
+My suggestion would be to gather more data, as this dataset is very small, old and most likely biased. 
+I think, next steps should be to get indivudaliced dashboards, so users can see they're own progress. I would recommend to create a level/tier system in which users can level up according to their activity.
