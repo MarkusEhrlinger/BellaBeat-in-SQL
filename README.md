@@ -11,4 +11,45 @@ executive team along with your high-level recommendations for Bellabeat’s mark
 
 Personal Note:
 I'm not coseplaying this, but rather try to show my approach how and why I did what I did. 
+------------------------------------------------------------------------------------------
+
+
+First I loaded the files to BigQuery as I wanted to do most of the work with SQL as some CSV-files are quite large.
+-------------------------------------------------------------------------------------------------------------------
+
+
+How many Ids are in the dataset?
+```sql
+SELECT
+ COUNT(DISTINCT(Id)) as Id_count
+FROM
+  capstone2-fitbit.FitBit_Data.dailyActivity
+```
+Answer: 33 in dailyActivity & dailyItensity, 24 in sleepDay
+-> Very small number compared to the amount of users
+At this point, I would have asked my more experienced colleagues.
+
+I continued my work.
+-----------------------------------------------------------------
+
+At what time of the day is the most activity?
+
+Firstly I needed to clean the timestamp in the file. I experienced some difficulties, time didn't convert, but then found out, I must change the UNICODE (UTF-8) to (UTF-7) in Liblre Office Calc, now the change was possible.
+I chose steps as an activity measurement. 
+
+```sql
+SELECT
+   DISTINCT(Time),
+   SUM(StepTotal)
+FROM
+    capstone2-fitbit.FitBit_Data.hourlySteps
+GROUP BY
+   TIME
+```
+![Overall activity per hour](https://user-images.githubusercontent.com/132265260/235455328-f0ed81b3-0660-416a-af77-8104e9d442cb.png)
+
+------------------------------------------------------------------
+
+
+
 
