@@ -50,6 +50,36 @@ GROUP BY
 
 ------------------------------------------------------------------
 
+Next question was, how is the overall activity on different workdays?
+
+```sql
+SELECT
+   
+   ROUND(AVG(TotalSteps),2) AS avg_steps,
+   ROUND(AVG(TotalDistance), 2) AS avg_distance,
+   ROUND(AVG(Calories), 2) AS avg_calories,
+  
+   CASE
+     WHEN EXTRACT(DAYOFWEEK FROM ActivityDate) = 1 THEN "Sunday"
+     WHEN EXTRACT(DAYOFWEEK FROM ActivityDate) = 2 THEN "Monday"
+     WHEN EXTRACT(DAYOFWEEK FROM ActivityDate) = 3 THEN "Tuesday"
+     WHEN EXTRACT(DAYOFWEEK FROM ActivityDate) = 4 THEN "Wednesday"
+     WHEN EXTRACT(DAYOFWEEK FROM ActivityDate) = 5 THEN "Thursday"
+     WHEN EXTRACT(DAYOFWEEK FROM ActivityDate) = 6 THEN "Friday"
+     ELSE "Saturday"
+   END AS day_of_week  
+FROM
+    capstone2-fitbit.FitBit_Data.dailyActivity
+
+GROUP BY
+    day_of_week
+```
+![Overall activity per weekday](https://user-images.githubusercontent.com/132265260/235456033-1e7026d5-f82d-45a6-bdd6-7640b04da53f.png)
+
+I took AVG(calories) and AVG(TotalDistance) into the query to have a quick look on the relation.
+No surprises here, more steps -> more distance -> more calories
+So I stayed with the step counts.
+--------------------------------------------------------------------------------
 
 
 
