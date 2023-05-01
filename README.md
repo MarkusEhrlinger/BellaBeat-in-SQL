@@ -81,5 +81,101 @@ No surprises here, more steps -> more distance -> more calories
 So I stayed with the step counts.
 --------------------------------------------------------------------------------
 
+I asked myself, how can I create a sort of tier system for different levels of activity?
+
+I kept it simple and simply added the different activity minutes per ID, then looked at the maximum and simply split it into 3 sections, high, medium and low activity.
+
+```sql
+SELECT
+     DISTINCT(Id),
+     SUM(VeryActiveMinutes + FairlyActiveMinutes + LightlyActiveMinutes ) AS status_minutes,
+     
+     CASE
+         WHEN SUM(VeryActiveMinutes + FairlyActiveMinutes + LightlyActiveMinutes ) <= 3000 
+         THEN "low active"
+
+         WHEN SUM(VeryActiveMinutes + FairlyActiveMinutes + LightlyActiveMinutes ) > 3000 
+         AND SUM(VeryActiveMinutes + FairlyActiveMinutes + LightlyActiveMinutes ) <= 7000 
+         THEN "medium active"
+
+         ELSE "high active"
+     END AS activity_status    
+FROM
+    capstone2-fitbit.FitBit_Data.dailyActivity      
+
+GROUP BY
+     Id
+
+ORDER BY
+    activity_status
+```
+-----------------------------------------------------------------------------------------
+
+These groups I combinded then with the hourly and weekday steps.
+
+For the steps per hour, I could simply join the tables I created before.
+
+```sql
+SELECT
+    DISTINCT(EXTRACT(TIME FROM  steps.ActivityHour)) AS time,
+    AVG(steps.StepTotal) AS avg_steps,
+    activity.activity_status,
+
+FROM
+    capstone2-fitbit.FitBit_Data.steps_per_hour AS steps
+
+    JOIN
+        capstone2-fitbit.FitBit_Data.activity_status AS activity
+    ON steps.Id = activity.Id    
+    
+GROUP BY
+    time,
+    activity_status   
+                
+ORDER BY
+    time                
+```  
+![Activity per status per hour](https://user-images.githubusercontent.com/132265260/235458439-c8aebdc1-a731-4b2a-afb2-fc82ea34adf2.png)
+
+For the weekdays, it wasn't so easy, I had to combine the queries into a new one and for some reason needed to change the activity-level a bit.
+
+```sql
+SELECT
+   Id,
+   SUM(VeryActiveMinutes + FairlyActiveMinutes + LightlyActiveMinutes ) AS status_minutes,
+   ROUND(AVG(TotalSteps),2) AS avg_steps,
+   
+     CASE
+         WHEN SUM(VeryActiveMinutes + FairlyActiveMinutes + LightlyActiveMinutes ) <= 600 
+         THEN "low active"
+
+         WHEN SUM(VeryActiveMinutes + FairlyActiveMinutes + LightlyActiveMinutes ) > 600 
+         AND SUM(VeryActiveMinutes + FairlyActiveMinutes + LightlyActiveMinutes ) <= 1300 
+         THEN "medium active"
+
+         ELSE "high active"
+
+     END AS activity_status,
+
+     CASE
+     WHEN EXTRACT(DAYOFWEEK FROM ActivityDate) = 1 THEN "Sunday"
+     WHEN EXTRACT(DAYOFWEEK FROM ActivityDate) = 2 THEN "Monday"
+     WHEN EXTRACT(DAYOFWEEK FROM ActivityDate) = 3 THEN "Tuesday"
+     WHEN EXTRACT(DAYOFWEEK FROM ActivityDate) = 4 THEN "Wednesday"
+     WHEN EXTRACT(DAYOFWEEK FROM ActivityDate) = 5 THEN "Thursday"
+     WHEN EXTRACT(DAYOFWEEK FROM ActivityDate) = 6 THEN "Friday"
+     ELSE "Saturday"
+   END AS day_of_week, 
+
+FROM
+    capstone2-fitbit.FitBit_Data.dailyActivity
+
+GROUP BY
+    Id,
+    day_of_week
+```
+![Activity per status per weekday](https://user-images.githubusercontent.com/132265260/235458805-cf281a14-8b06-43ff-90e6-507859558a51.png)
+
+---------------------------------------------------------------------------------
 
 
