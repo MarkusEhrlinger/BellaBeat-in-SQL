@@ -27,7 +27,7 @@ FROM
   capstone2-fitbit.FitBit_Data.dailyActivity
 ```
 Answer: 33 in dailyActivity & dailyItensity, 24 in sleepDay
--> Very small number compared to the amount of users
+-> Very small number compared to the amount of users.
 At this point, I would have asked my more experienced colleagues.
 
 I continued my work.
@@ -78,8 +78,9 @@ GROUP BY
 ![Overall activity per weekday](https://user-images.githubusercontent.com/132265260/235456033-1e7026d5-f82d-45a6-bdd6-7640b04da53f.png)
 
 I took AVG(calories) and AVG(TotalDistance) into the query to have a quick look on the relation.
-No surprises here, more steps -> more distance -> more calories
+No surprises here, more steps -> more distance -> more calories, didn't want to waste time on these graphs, just quick and dirty check in a spreadsheet.
 So I stayed with the step counts.
+
 --------------------------------------------------------------------------------
 
 I asked myself, how can I create a sort of tier system for different levels of activity?
