@@ -16,6 +16,7 @@ I used mainly BigQuery, but did some cleaning and quick graphs in Google-Sheets/
 
 
 First I loaded the files to BigQuery as I wanted to do most of the work with SQL as some CSV-files are quite large.
+
 -------------------------------------------------------------------------------------------------------------------
 
 
