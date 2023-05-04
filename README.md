@@ -193,3 +193,11 @@ My conclusion is, that the most active days are Saturday and Tuesday. The lowest
 More active users work out after work, while medium users prefer the lunchbreak. Least active users prefer the morning. 
 My suggestion would be to gather more data, as this dataset is very small, old and most likely biased. 
 I think, next steps should be to get indivudaliced dashboards, so users can see they're own progress. I would recommend to create a level/tier system in which users can level up according to their activity.
+
+---------------------------------------------------------------------------------------
+
+I made the indivudualizced dashboard. Now you can chose date and Id to see the individual stats.
+
+![Dashboard 2](https://user-images.githubusercontent.com/132265260/236192828-dc909ffb-2850-40ee-bfa2-34db4eee8e8b.png)
+
+https://public.tableau.com/views/Bellabeat-Individual-Dashboard/Dashboard1?:language=de-DE&:display_count=n&:origin=viz_share_link
